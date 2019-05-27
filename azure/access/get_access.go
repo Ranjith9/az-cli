@@ -10,6 +10,7 @@ import (
 	"os/user"
 )
 
+// This struct is to work with Azure credentials
 type Credentials struct {
 	Profile        string
 	ClientID       string
@@ -32,7 +33,7 @@ func init() {
 	var data []Credentials
 	err := json.Unmarshal(plan, &data)
 	if err != nil {
-		fmt.Errorf("Cannot unmarshal the json ", err)
+		fmt.Println("Cannot unmarshal the json ", err)
 	}
 	for _, t := range data {
 
@@ -48,6 +49,7 @@ func init() {
 	}
 }
 
+// This method is to initiate the Oauthtoken in Azure
 func GetServicePrincipalToken() (adal.OAuthTokenProvider, error, string) {
 	oauthConfig, err := adal.NewOAuthConfig(azure.PublicCloud.ActiveDirectoryEndpoint, result.TenantID)
 	code, err := adal.NewServicePrincipalToken(

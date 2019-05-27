@@ -20,6 +20,7 @@ func getVMClient() compute.VirtualMachinesClient {
 	return vmClient
 }
 
+// This struct is to work with the VMs in Azure
 type VMIn struct {
 	ResourceGroup string
 	VmName        string `json:"vmname,omitempty"`
@@ -29,6 +30,7 @@ type VMIn struct {
 	Location      string `json:"location,omitempty"`
 }
 
+// This method is to create VM in a resourcegroup
 func (v VMIn) CreateVM() (vm compute.VirtualMachine, err error) {
 
 	vmClient := getVMClient()
@@ -83,6 +85,7 @@ func (v VMIn) CreateVM() (vm compute.VirtualMachine, err error) {
 	return future.Result(vmClient)
 }
 
+// This method is to delete VM in a resourcegroup
 func (v VMIn) DeleteVM() (ar autorest.Response, err error) {
 
 	vmClient := getVMClient()
@@ -103,6 +106,7 @@ func (v VMIn) DeleteVM() (ar autorest.Response, err error) {
 	return future.Result(vmClient)
 }
 
+// This method is to get VM in a resourcegroup
 func (v VMIn) GetVM() (vm compute.VirtualMachine, err error) {
 
 	vmClient := getVMClient()
@@ -119,6 +123,7 @@ func (v VMIn) GetVM() (vm compute.VirtualMachine, err error) {
 	return future, err
 }
 
+// This method is to list VM in a resourcegroup
 func (v VMIn) ListVM() (vm []compute.VirtualMachine, err error) {
 
 	vmClient := getVMClient()

@@ -13,6 +13,7 @@ var (
 	ctx                    = context.Background()
 )
 
+// This struct is to create to do operations on Resourcegroups
 type GroupsIn struct {
 	ResourceGroup string
 	Location      string `json:"location,omitempty"`
@@ -25,6 +26,7 @@ func getGroupsClient() resources.GroupsClient {
 	return groupsClient
 }
 
+// This method is to create ResourceGroup
 func (g GroupsIn) CreateResourceGroup() (group resources.Group, err error) {
 	groupsClient := getGroupsClient()
 	return groupsClient.CreateOrUpdate(
@@ -35,6 +37,7 @@ func (g GroupsIn) CreateResourceGroup() (group resources.Group, err error) {
 		})
 }
 
+// This method is to get ResourceGroup
 func (g GroupsIn) GetResourceGroup() (resources.Group, error) {
 	groupsClient := getGroupsClient()
 	return groupsClient.Get(
@@ -43,6 +46,7 @@ func (g GroupsIn) GetResourceGroup() (resources.Group, error) {
 	)
 }
 
+// This method is to check the existance ResourceGroup
 func (g GroupsIn) CheckResourceGroup() (ar autorest.Response, err error) {
 	groupsClient := getGroupsClient()
 	resp, err := groupsClient.CheckExistence(

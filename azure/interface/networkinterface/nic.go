@@ -13,6 +13,7 @@ func getNicClient() network.InterfacesClient {
 	return nicClient
 }
 
+// This struct is to work with the NICs
 type NicIn struct {
 	ResourceGroup string
 	NicName       string `json:"nicname,omitempty"`
@@ -22,6 +23,7 @@ type NicIn struct {
 	Location      string `json:"location,omitempty"`
 }
 
+// This method is to create the nic in a resourcegroup
 func (n NicIn) CreateNIC() (nic network.Interface, err error) {
 
 	nicParams := network.Interface{
@@ -71,6 +73,7 @@ func (n NicIn) CreateNIC() (nic network.Interface, err error) {
 	return future.Result(nicClient)
 }
 
+// This method is to delete the nic in a resourcegroup
 func (n NicIn) DeleteNIC() (ar autorest.Response, err error) {
 	nicClient := getNicClient()
 	future, err := nicClient.Delete(
@@ -90,6 +93,7 @@ func (n NicIn) DeleteNIC() (ar autorest.Response, err error) {
 	return future.Result(nicClient)
 }
 
+// This method is to get the nic in a resourcegroup
 func (n NicIn) GetNIC() (nic network.Interface, err error) {
 	nicClient := getNicClient()
 	future, err := nicClient.Get(
@@ -104,6 +108,7 @@ func (n NicIn) GetNIC() (nic network.Interface, err error) {
 	return future, err
 }
 
+// This method is to list the nic in a resourcegroup
 func (n NicIn) ListNIC() (nic []network.Interface, err error) {
 	nicClient := getNicClient()
 	future, err := nicClient.List(
@@ -118,6 +123,7 @@ func (n NicIn) ListNIC() (nic []network.Interface, err error) {
 	return future.Values(), err
 }
 
+// This method is to lists the nic
 func ListAllNIC() (nic []network.Interface, err error) {
 	nicClient := getNicClient()
 	future, err := nicClient.ListAll(

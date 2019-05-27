@@ -14,6 +14,7 @@ func getNsgRuleClient() network.SecurityRulesClient {
 	return nsgRuleClient
 }
 
+// This struct is to work with the NSGrules
 type SecurityRuleIn struct {
 	ResourceGroup string
 	NsgName       string `json:"nsgname,omitempty"`
@@ -22,6 +23,7 @@ type SecurityRuleIn struct {
 	Priority      int32  `json:"priority,omitempty"`
 }
 
+// This method is to create the nsgrules in a resourcegroup
 func (rule SecurityRuleIn) CreateNetworkSecurityRule() (nsgrule network.SecurityRule, err error) {
 	nsgRuleClient := getNsgRuleClient()
 	future, err := nsgRuleClient.CreateOrUpdate(

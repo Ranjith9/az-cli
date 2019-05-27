@@ -13,14 +13,16 @@ func getSubnetsClient() network.SubnetsClient {
 	return subnetsClient
 }
 
+// This struct is to work with subnets
 type SubnetIn struct {
 	ResourceGroup string
 	VnetName      string `json:"vnetname,omitempty"`
 	SubnetName    string `json:"subnetname,omitempty"`
 	SubnetCidr    string `json:"cidr,omitempty"`
-	NsgID         string `json:nsg,omitempty`
+	NsgID         string `json:"nsg,omitempty"`
 }
 
+// This method is to create the subnets in a Vnet
 func (sub SubnetIn) CreateVirtualNetworkSubnet() (subnet network.Subnet, err error) {
 
 	subnetParams := network.Subnet{
@@ -57,6 +59,7 @@ func (sub SubnetIn) CreateVirtualNetworkSubnet() (subnet network.Subnet, err err
 	return future.Result(subnetsClient)
 }
 
+// This method is to delete the subnets in a Vnet
 func (sub SubnetIn) DeleteVirtualNetworkSubnet() (ar autorest.Response, err error) {
 	subnetsClient := getSubnetsClient()
 
@@ -79,6 +82,7 @@ func (sub SubnetIn) DeleteVirtualNetworkSubnet() (ar autorest.Response, err erro
 	return future.Result(subnetsClient)
 }
 
+// This method is to get the subnets in a Vnet
 func (sub SubnetIn) GetVirtualNetworkSubnet() (subnet network.Subnet, err error) {
 	subnetsClient := getSubnetsClient()
 
@@ -95,6 +99,7 @@ func (sub SubnetIn) GetVirtualNetworkSubnet() (subnet network.Subnet, err error)
 	return future, err
 }
 
+// This method is to lists the subnets in a Vnet
 func (sub SubnetIn) ListVirtualNetworkSubnet() (subnet []network.Subnet, err error) {
 	subnetsClient := getSubnetsClient()
 

@@ -7,10 +7,12 @@ import (
 	"fmt"
 )
 
+// This Struct is to get the name from the az-cli command
 type CreateIN struct {
 	Name string
 }
 
+// This create function will create the VM in the resourcegroup "CLI-group" and a Vnet called " cli-net"  
 func (c CreateIN) Create() {
 
 	g := azureregroup.GroupsIn{"CLI-group", "CentralIndia"}

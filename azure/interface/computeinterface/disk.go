@@ -12,12 +12,14 @@ func getDisksClient() compute.DisksClient {
 	return disksClient
 }
 
+// This structure is to work with the disk operations
 type DisksIn struct {
 	ResourceGroup string
 	DiskName      string `json:"snapshotname,omitempty"`
 	Location      string `json:"location,omitempty"`
 }
 
+// This method is to delete vmdisk
 func (d DisksIn) DeleteDisk() (ar autorest.Response, err error) {
 
 	disksClient := getDisksClient()
