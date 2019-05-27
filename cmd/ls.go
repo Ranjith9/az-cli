@@ -17,8 +17,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
 	"az-cli/azure/interface/computeinterface"
+	"github.com/spf13/cobra"
 )
 
 // lsCmd represents the ls command
@@ -33,11 +33,13 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		v := azurecompute.VMIn{ResourceGroup: "CLI-group"}
-                i,j := v.ListVM()
-                if j != nil { fmt.Println(j) }
-		for _,k := range i {
-		        fmt.Println(*k.Name)
-	        }
+		i, j := v.ListVM()
+		if j != nil {
+			fmt.Println(j)
+		}
+		for _, k := range i {
+			fmt.Println(*k.Name)
+		}
 	},
 }
 

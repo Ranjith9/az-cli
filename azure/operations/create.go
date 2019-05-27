@@ -1,14 +1,14 @@
 package environment
 
 import (
-	"fmt"
 	"az-cli/azure/interface/computeinterface"
 	"az-cli/azure/interface/networkinterface"
 	"az-cli/azure/interface/resourceinterface"
+	"fmt"
 )
 
 type CreateIN struct {
-	Name         string
+	Name string
 }
 
 func (c CreateIN) Create() {
@@ -16,13 +16,11 @@ func (c CreateIN) Create() {
 	g := azureregroup.GroupsIn{"CLI-group", "CentralIndia"}
 	g.CreateResourceGroup()
 
-
 	v := azurenetwork.VnetIn{"CLI-group", "gloify-net", "192.168.0.0/16", "CentralIndia"}
 	v.CreateVirtualNetwork()
 
 	s := azurenetwork.SubnetIn{"CLI-group", "gloify-net", "subnet1", "192.168.10.0/24", ""}
 	sub, _ := s.CreateVirtualNetworkSubnet()
-
 
 	n := azurenetwork.NsgIn{"CLI-group", c.Name + "-nsg", "CentralIndia"}
 	nsg, _ := n.CreateNetworkSecurityGroup()

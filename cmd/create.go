@@ -15,8 +15,8 @@
 package cmd
 
 import (
+	"az-cli/azure/operations"
 	"fmt"
-        "az-cli/azure/operations"
 	"github.com/spf13/cobra"
 )
 
@@ -38,7 +38,6 @@ to quickly create a Cobra application.`,
 }
 
 var name string
-
 
 func init() {
 	rootCmd.AddCommand(createCmd)

@@ -1,21 +1,21 @@
 package azureregroup
 
 import (
-        "context"
-        "github.com/Azure/azure-sdk-for-go/services/resources/mgmt/2019-03-01/resources"
-        "github.com/Azure/go-autorest/autorest"
-        "github.com/Azure/go-autorest/autorest/to"
-        "az-cli/azure/access"
+	"az-cli/azure/access"
+	"context"
+	"github.com/Azure/azure-sdk-for-go/services/resources/mgmt/2019-03-01/resources"
+	"github.com/Azure/go-autorest/autorest"
+	"github.com/Azure/go-autorest/autorest/to"
 )
 
 var (
-        token, _, subscription = auth.GetServicePrincipalToken()
-        ctx = context.Background()
+	token, _, subscription = auth.GetServicePrincipalToken()
+	ctx                    = context.Background()
 )
 
 type GroupsIn struct {
-        ResourceGroup string
-        Location string      `json:"location,omitempty"`
+	ResourceGroup string
+	Location      string `json:"location,omitempty"`
 }
 
 func getGroupsClient() resources.GroupsClient {
@@ -36,21 +36,21 @@ func (g GroupsIn) CreateResourceGroup() (group resources.Group, err error) {
 }
 
 func (g GroupsIn) GetResourceGroup() (resources.Group, error) {
-       groupsClient := getGroupsClient()
-       return groupsClient.Get(
-               ctx,
-	       g.ResourceGroup,
-       )
+	groupsClient := getGroupsClient()
+	return groupsClient.Get(
+		ctx,
+		g.ResourceGroup,
+	)
 }
 
-func (g GroupsIn) CheckResourceGroup() (ar  autorest.Response, err error) {
-       groupsClient := getGroupsClient()
-       resp, err :=  groupsClient.CheckExistence(
-               ctx,
-               g.ResourceGroup,
-       )
-       if err != nil {
+func (g GroupsIn) CheckResourceGroup() (ar autorest.Response, err error) {
+	groupsClient := getGroupsClient()
+	resp, err := groupsClient.CheckExistence(
+		ctx,
+		g.ResourceGroup,
+	)
+	if err != nil {
 		return ar, err
-       }
-       return resp,err
+	}
+	return resp, err
 }

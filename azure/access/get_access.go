@@ -19,7 +19,7 @@ type Credentials struct {
 }
 
 var (
-        result Credentials
+	result Credentials
 )
 
 func init() {

@@ -15,8 +15,8 @@
 package cmd
 
 import (
+	"az-cli/azure/operations"
 	"fmt"
-        "az-cli/azure/operations"
 	"github.com/spf13/cobra"
 )
 
@@ -32,8 +32,8 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		y := environment.DeleteIN{vmName}
-                fmt.Println(y)
-                y.Delete()
+		fmt.Println(y)
+		y.Delete()
 	},
 }
 
@@ -41,5 +41,5 @@ var vmName string
 
 func init() {
 	rootCmd.AddCommand(rmCmd)
-        rmCmd.Flags().StringVarP(&vmName, "vmName", "", "", "Name of the VM to delete")
+	rmCmd.Flags().StringVarP(&vmName, "vmName", "", "", "Name of the VM to delete")
 }

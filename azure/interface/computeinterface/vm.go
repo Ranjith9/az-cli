@@ -1,8 +1,8 @@
 package azurecompute
 
 import (
-	"context"
 	"az-cli/azure/access"
+	"context"
 	"fmt"
 	"github.com/Azure/azure-sdk-for-go/services/compute/mgmt/2019-03-01/compute"
 	"github.com/Azure/go-autorest/autorest"
@@ -11,7 +11,7 @@ import (
 
 var (
 	token, _, subscription = auth.GetServicePrincipalToken()
-        ctx = context.Background()
+	ctx                    = context.Background()
 )
 
 func getVMClient() compute.VirtualMachinesClient {
@@ -21,12 +21,12 @@ func getVMClient() compute.VirtualMachinesClient {
 }
 
 type VMIn struct {
-        ResourceGroup string
-        VmName string           `json:"vmname,omitempty"`
-        NicID string            `json:"nicid,omitempty"`
-        UserName string         `json:"username,omitempty"`
-        Password string         `json:"password,omitempty"`
-        Location string         `json:"location,omitempty"`
+	ResourceGroup string
+	VmName        string `json:"vmname,omitempty"`
+	NicID         string `json:"nicid,omitempty"`
+	UserName      string `json:"username,omitempty"`
+	Password      string `json:"password,omitempty"`
+	Location      string `json:"location,omitempty"`
 }
 
 func (v VMIn) CreateVM() (vm compute.VirtualMachine, err error) {
@@ -85,52 +85,51 @@ func (v VMIn) CreateVM() (vm compute.VirtualMachine, err error) {
 
 func (v VMIn) DeleteVM() (ar autorest.Response, err error) {
 
-        vmClient := getVMClient()
-        future, err := vmClient.Delete(
-                ctx,
-                v.ResourceGroup,
-                v.VmName,
-                )
-        if err != nil {
-                return ar, fmt.Errorf("cannot delete VM: %v", err)
-        }
+	vmClient := getVMClient()
+	future, err := vmClient.Delete(
+		ctx,
+		v.ResourceGroup,
+		v.VmName,
+	)
+	if err != nil {
+		return ar, fmt.Errorf("cannot delete VM: %v", err)
+	}
 
-        err = future.WaitForCompletionRef(ctx, vmClient.Client)
-        if err != nil {
-                return ar, fmt.Errorf("cannot get the VM delete future response: %v", err)
-        }
+	err = future.WaitForCompletionRef(ctx, vmClient.Client)
+	if err != nil {
+		return ar, fmt.Errorf("cannot get the VM delete future response: %v", err)
+	}
 
-        return  future.Result(vmClient)
+	return future.Result(vmClient)
 }
-
 
 func (v VMIn) GetVM() (vm compute.VirtualMachine, err error) {
 
-        vmClient := getVMClient()
-        future, err := vmClient.Get(
-                ctx,
-                v.ResourceGroup,
-                v.VmName,
-                "")
+	vmClient := getVMClient()
+	future, err := vmClient.Get(
+		ctx,
+		v.ResourceGroup,
+		v.VmName,
+		"")
 
-        if err != nil {
-                return vm, fmt.Errorf("cannot get virtual VM: %v", err)
-        }
+	if err != nil {
+		return vm, fmt.Errorf("cannot get virtual VM: %v", err)
+	}
 
-        return future, err
+	return future, err
 }
 
 func (v VMIn) ListVM() (vm []compute.VirtualMachine, err error) {
 
-        vmClient := getVMClient()
-        future, err := vmClient.List(
-                ctx,
-                v.ResourceGroup,
-                )
+	vmClient := getVMClient()
+	future, err := vmClient.List(
+		ctx,
+		v.ResourceGroup,
+	)
 
-        if err != nil {
-                return vm, fmt.Errorf("cannot list the VMs in a resourcegroup: %v", err)
-        }
+	if err != nil {
+		return vm, fmt.Errorf("cannot list the VMs in a resourcegroup: %v", err)
+	}
 
-        return future.Values(), err
+	return future.Values(), err
 }

@@ -15,23 +15,22 @@ func getNsgRuleClient() network.SecurityRulesClient {
 }
 
 type SecurityRuleIn struct {
-        ResourceGroup string
-        NsgName string       `json:"nsgname,omitempty"`
-        RuleName string      `json:"rulename,omitempty"`
-        Port string          `json:"port,omitempty"`
-        Priority int32       `json:"priority,omitempty"`
+	ResourceGroup string
+	NsgName       string `json:"nsgname,omitempty"`
+	RuleName      string `json:"rulename,omitempty"`
+	Port          string `json:"port,omitempty"`
+	Priority      int32  `json:"priority,omitempty"`
 }
 
-
-func (rule SecurityRuleIn) CreateNetworkSecurityRule()(nsgrule network.SecurityRule, err error) {
+func (rule SecurityRuleIn) CreateNetworkSecurityRule() (nsgrule network.SecurityRule, err error) {
 	nsgRuleClient := getNsgRuleClient()
 	future, err := nsgRuleClient.CreateOrUpdate(
 		ctx,
 		rule.ResourceGroup,
 		rule.NsgName,
-                rule.RuleName,
-                network.SecurityRule {
-                        Name: to.StringPtr(rule.RuleName),
+		rule.RuleName,
+		network.SecurityRule{
+			Name: to.StringPtr(rule.RuleName),
 			SecurityRulePropertiesFormat: &network.SecurityRulePropertiesFormat{
 				Protocol:                 network.SecurityRuleProtocolTCP,
 				SourceAddressPrefix:      to.StringPtr("0.0.0.0/0"),
@@ -42,7 +41,7 @@ func (rule SecurityRuleIn) CreateNetworkSecurityRule()(nsgrule network.SecurityR
 				Direction:                network.SecurityRuleDirectionInbound,
 				Priority:                 to.Int32Ptr(rule.Priority),
 			},
-                },
+		},
 	)
 
 	if err != nil {
