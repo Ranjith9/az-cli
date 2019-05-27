@@ -51,7 +51,11 @@ func init() {
 
 // GetServicePrincipalToken method is to initiate the Oauthtoken in Azure
 func GetServicePrincipalToken() (adal.OAuthTokenProvider, string, error) {
-	oauthConfig, err := adal.NewOAuthConfig(azure.PublicCloud.ActiveDirectoryEndpoint, result.TenantID)
+	oauthConfig, err1 := adal.NewOAuthConfig(azure.PublicCloud.ActiveDirectoryEndpoint, result.TenantID)
+	if err1 != nil {
+                log.Fatalf("%s: %v\n", "failed to oauthConfig", err1)
+        }
+
 	code, err := adal.NewServicePrincipalToken(
 		*oauthConfig,
 		result.ClientID,
