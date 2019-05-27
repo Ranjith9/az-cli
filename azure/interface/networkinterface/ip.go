@@ -104,7 +104,7 @@ func (pubip IpIn) ListPublicIP() (ip []network.PublicIPAddress, err error) {
 	return future.Values(), err
 }
 
-//  ListAllPublicIP method is to lists the ips
+// ListAllPublicIP method is to lists the ips
 func (pubip IpIn) ListAllPublicIP() (ip []network.PublicIPAddress, err error) {
 	ipClient := getIPClient()
 	future, err := ipClient.ListAll(

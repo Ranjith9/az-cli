@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	token, _, subscription = auth.GetServicePrincipalToken()
+	token, subscription, _ = auth.GetServicePrincipalToken()
 	ctx                    = context.Background()
 )
 
@@ -46,7 +46,7 @@ func (g GroupsIn) GetResourceGroup() (resources.Group, error) {
 	)
 }
 
-// CheckResourceGroup method is to check the existance ResourceGroup
+// CheckResourceGroup method is to check the existence ResourceGroup
 func (g GroupsIn) CheckResourceGroup() (ar autorest.Response, err error) {
 	groupsClient := getGroupsClient()
 	resp, err := groupsClient.CheckExistence(

@@ -99,7 +99,7 @@ func (sub SubnetIn) GetVirtualNetworkSubnet() (subnet network.Subnet, err error)
 	return future, err
 }
 
-//  ListVirtualNetworkSubnet method is to lists the subnets in a Vnet
+// ListVirtualNetworkSubnet method is to lists the subnets in a Vnet
 func (sub SubnetIn) ListVirtualNetworkSubnet() (subnet []network.Subnet, err error) {
 	subnetsClient := getSubnetsClient()
 

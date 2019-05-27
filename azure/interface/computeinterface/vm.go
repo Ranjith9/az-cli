@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	token, _, subscription = auth.GetServicePrincipalToken()
+	token, subscription, _ = auth.GetServicePrincipalToken()
 	ctx                    = context.Background()
 )
 

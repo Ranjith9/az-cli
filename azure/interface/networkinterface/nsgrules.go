@@ -23,7 +23,7 @@ type SecurityRuleIn struct {
 	Priority      int32  `json:"priority,omitempty"`
 }
 
-//  CreateNetworkSecurityRule method is to create the nsgrules in a resourcegroup
+// CreateNetworkSecurityRule method is to create the nsgrules in a resourcegroup
 func (rule SecurityRuleIn) CreateNetworkSecurityRule() (nsgrule network.SecurityRule, err error) {
 	nsgRuleClient := getNsgRuleClient()
 	future, err := nsgRuleClient.CreateOrUpdate(

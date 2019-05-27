@@ -19,7 +19,7 @@ type DisksIn struct {
 	Location      string `json:"location,omitempty"`
 }
 
-//  DeleteDisk method is to delete vmdisk
+// DeleteDisk method is to delete vmdisk
 func (d DisksIn) DeleteDisk() (ar autorest.Response, err error) {
 
 	disksClient := getDisksClient()

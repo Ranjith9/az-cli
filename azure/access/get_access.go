@@ -10,7 +10,7 @@ import (
 	"os/user"
 )
 
-// This struct is to work with Azure credentials
+// Credentials struct is to work with Azure credentials
 type Credentials struct {
 	Profile        string
 	ClientID       string
@@ -49,8 +49,8 @@ func init() {
 	}
 }
 
-// This method is to initiate the Oauthtoken in Azure
-func GetServicePrincipalToken() (adal.OAuthTokenProvider, error, string) {
+// GetServicePrincipalToken method is to initiate the Oauthtoken in Azure
+func GetServicePrincipalToken() (adal.OAuthTokenProvider, string, error) {
 	oauthConfig, err := adal.NewOAuthConfig(azure.PublicCloud.ActiveDirectoryEndpoint, result.TenantID)
 	code, err := adal.NewServicePrincipalToken(
 		*oauthConfig,
@@ -61,5 +61,5 @@ func GetServicePrincipalToken() (adal.OAuthTokenProvider, error, string) {
 		log.Fatalf("%s: %v\n", "failed to initiate device auth", err)
 	}
 
-	return code, err, result.SubscriptionID
+	return code, result.SubscriptionID, err)
 }
