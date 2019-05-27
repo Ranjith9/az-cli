@@ -53,8 +53,8 @@ func init() {
 func GetServicePrincipalToken() (adal.OAuthTokenProvider, string, error) {
 	oauthConfig, err1 := adal.NewOAuthConfig(azure.PublicCloud.ActiveDirectoryEndpoint, result.TenantID)
 	if err1 != nil {
-                log.Fatalf("%s: %v\n", "failed to oauthConfig", err1)
-        }
+		log.Fatalf("%s: %v\n", "failed to oauthConfig", err1)
+	}
 
 	code, err := adal.NewServicePrincipalToken(
 		*oauthConfig,
