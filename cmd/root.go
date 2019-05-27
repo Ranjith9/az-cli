@@ -37,6 +37,7 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 }
 
+// Execute will executes the root command
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)

@@ -14,7 +14,7 @@ var (
 	ctx                    = context.Background()
 )
 
-// This struct is to work with Vnets
+// VnetIn is to work with Vnets
 type VnetIn struct {
 	ResourceGroup string
 	VnetName      string `json:"vnetname,omitempty"`
@@ -29,7 +29,7 @@ func getVnetClient() network.VirtualNetworksClient {
 	return vnetClient
 }
 
-// This method is to create Vnet in a resourcegroup
+// CreateVirtualNetwork method is to create Vnet in a resourcegroup
 func (net VnetIn) CreateVirtualNetwork() (vnet network.VirtualNetwork, err error) {
 	vnetClient := getVnetClient()
 	future, err := vnetClient.CreateOrUpdate(
@@ -57,7 +57,7 @@ func (net VnetIn) CreateVirtualNetwork() (vnet network.VirtualNetwork, err error
 	return future.Result(vnetClient)
 }
 
-// This method is to get Vnet in a resourcegroup
+// GetVirtualNetwork method is to get Vnet in a resourcegroup
 func (net VnetIn) GetVirtualNetwork() (vnet network.VirtualNetwork, err error) {
 	vnetClient := getVnetClient()
 	future, err := vnetClient.Get(
@@ -73,7 +73,7 @@ func (net VnetIn) GetVirtualNetwork() (vnet network.VirtualNetwork, err error) {
 	return future, err
 }
 
-// This method is to delete Vnet in a resourcegroup
+// DeleteVirtualNetwork method is to delete Vnet in a resourcegroup
 func (net VnetIn) DeleteVirtualNetwork() (ar autorest.Response, err error) {
 	vnetClient := getVnetClient()
 	future, err := vnetClient.Delete(
@@ -94,7 +94,7 @@ func (net VnetIn) DeleteVirtualNetwork() (ar autorest.Response, err error) {
 	return future.Result(vnetClient)
 }
 
-// This method is to list Vnets in a resourcegroup
+// ListVirtualNetwork method is to list Vnets in a resourcegroup
 func (net VnetIn) ListVirtualNetwork() (vnet []network.VirtualNetwork, err error) {
 	vnetClient := getVnetClient()
 	future, err := vnetClient.List(
@@ -108,7 +108,7 @@ func (net VnetIn) ListVirtualNetwork() (vnet []network.VirtualNetwork, err error
 	return future.Values(), err
 }
 
-// This method is to lists Vnets
+// ListAllVirtualNetwork method is to lists Vnets
 func ListAllVirtualNetwork() (vnet []network.VirtualNetwork, err error) {
 	vnetClient := getVnetClient()
 	future, err := vnetClient.ListAll(

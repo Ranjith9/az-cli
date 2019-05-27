@@ -14,14 +14,14 @@ func getNsgClient() network.SecurityGroupsClient {
 	return nsgClient
 }
 
-// This struct is to work with the NSGs
+// NsgIn struct is to work with the NSGs
 type NsgIn struct {
 	ResourceGroup string
 	NsgName       string `json:"nsgname,omitempty"`
 	Location      string `json:"location,omitempty"`
 }
 
-// This method is to create the nsg in a resourcegroup
+// CreateNetworkSecurityGroup method is to create the nsg in a resourcegroup
 func (ns NsgIn) CreateNetworkSecurityGroup() (nsg network.SecurityGroup, err error) {
 
 	nsgParams := network.SecurityGroup{
@@ -49,7 +49,7 @@ func (ns NsgIn) CreateNetworkSecurityGroup() (nsg network.SecurityGroup, err err
 	return future.Result(nsgClient)
 }
 
-// This method is to delete the nsg in a resourcegroup
+// DeleteNetworkSecurityGroup method is to delete the nsg in a resourcegroup
 func (ns NsgIn) DeleteNetworkSecurityGroup() (ar autorest.Response, err error) {
 	nsgClient := getNsgClient()
 	future, err := nsgClient.Delete(
@@ -70,7 +70,7 @@ func (ns NsgIn) DeleteNetworkSecurityGroup() (ar autorest.Response, err error) {
 	return future.Result(nsgClient)
 }
 
-// This method is to get the nsg in a resourcegroup
+// GetNetworkSecurityGroup method is to get the nsg in a resourcegroup
 func (ns NsgIn) GetNetworkSecurityGroup() (nsg network.SecurityGroup, err error) {
 	nsgClient := getNsgClient()
 	future, err := nsgClient.Get(
@@ -86,7 +86,7 @@ func (ns NsgIn) GetNetworkSecurityGroup() (nsg network.SecurityGroup, err error)
 	return future, err
 }
 
-// This method is to list the nsg in a resourcegroup
+// ListNetworkSecurityGroup method is to list the nsg in a resourcegroup
 func (ns NsgIn) ListNetworkSecurityGroup() (nsg []network.SecurityGroup, err error) {
 	nsgClient := getNsgClient()
 	future, err := nsgClient.List(
@@ -101,7 +101,7 @@ func (ns NsgIn) ListNetworkSecurityGroup() (nsg []network.SecurityGroup, err err
 	return future.Values(), err
 }
 
-// // This method is to lists the nsg
+// ListAllNetworkSecurityGroup method is to lists the nsg
 func ListAllNetworkSecurityGroup() (nsg []network.SecurityGroup, err error) {
 	nsgClient := getNsgClient()
 	future, err := nsgClient.ListAll(

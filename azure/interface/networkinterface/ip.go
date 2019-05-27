@@ -14,14 +14,14 @@ func getIPClient() network.PublicIPAddressesClient {
 	return ipClient
 }
 
-// This struct is to work with the ips
+// IpIn struct is to work with the ips
 type IpIn struct {
 	ResourceGroup string
 	IpName        string `json:"ipname,omitempty"`
 	Location      string `json:"location,omitempty"`
 }
 
-// This method is to create the ips in a resourcegroup
+// CreatePublicIP method is to create the ips in a resourcegroup
 func (pubip IpIn) CreatePublicIP() (ip network.PublicIPAddress, err error) {
 	ipClient := getIPClient()
 	future, err := ipClient.CreateOrUpdate(
@@ -53,7 +53,7 @@ func (pubip IpIn) CreatePublicIP() (ip network.PublicIPAddress, err error) {
 	return future.Result(ipClient)
 }
 
-// This method is to delete the ips in a resourcegroup
+// DeletePublicIP method is to delete the ips in a resourcegroup
 func (pubip IpIn) DeletePublicIP() (ar autorest.Response, err error) {
 	ipClient := getIPClient()
 	future, err := ipClient.Delete(
@@ -73,7 +73,7 @@ func (pubip IpIn) DeletePublicIP() (ar autorest.Response, err error) {
 	return future.Result(ipClient)
 }
 
-// This method is to get the ips in a resourcegroup
+// GetPublicIP method is to get the ips in a resourcegroup
 func (pubip IpIn) GetPublicIP() (ip network.PublicIPAddress, err error) {
 	ipClient := getIPClient()
 	future, err := ipClient.Get(
@@ -89,7 +89,7 @@ func (pubip IpIn) GetPublicIP() (ip network.PublicIPAddress, err error) {
 	return future, err
 }
 
-// This method is to lists the ips in a resourcegroup
+// ListPublicIP method is to lists the ips in a resourcegroup
 func (pubip IpIn) ListPublicIP() (ip []network.PublicIPAddress, err error) {
 	ipClient := getIPClient()
 	future, err := ipClient.List(
@@ -104,7 +104,7 @@ func (pubip IpIn) ListPublicIP() (ip []network.PublicIPAddress, err error) {
 	return future.Values(), err
 }
 
-// This method is to lists the ips
+//  ListAllPublicIP method is to lists the ips
 func (pubip IpIn) ListAllPublicIP() (ip []network.PublicIPAddress, err error) {
 	ipClient := getIPClient()
 	future, err := ipClient.ListAll(

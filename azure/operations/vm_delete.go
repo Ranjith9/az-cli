@@ -6,12 +6,12 @@ import (
 	"fmt"
 )
 
-// This struct will take name from az-cli arguments to delete VM in Azure
+// DeleteIN will take name from az-cli arguments to delete VM in Azure
 type DeleteIN struct {
 	VmName string
 }
 
-// This function will delete the VM along with its components in Azure
+// Delete will delete the VM along with its components in Azure
 func (v DeleteIN) Delete() {
 
 	m := azurecompute.VMIn{ResourceGroup: "CLI-group", VmName: v.VmName}
