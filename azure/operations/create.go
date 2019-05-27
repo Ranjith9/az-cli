@@ -16,10 +16,10 @@ func (c CreateIN) Create() {
 	g := azureregroup.GroupsIn{"CLI-group", "CentralIndia"}
 	g.CreateResourceGroup()
 
-	v := azurenetwork.VnetIn{"CLI-group", "gloify-net", "192.168.0.0/16", "CentralIndia"}
+	v := azurenetwork.VnetIn{"CLI-group", "cli-net", "192.168.0.0/16", "CentralIndia"}
 	v.CreateVirtualNetwork()
 
-	s := azurenetwork.SubnetIn{"CLI-group", "gloify-net", "subnet1", "192.168.10.0/24", ""}
+	s := azurenetwork.SubnetIn{"CLI-group", "cli-net", "subnet1", "192.168.10.0/24", ""}
 	sub, _ := s.CreateVirtualNetworkSubnet()
 
 	n := azurenetwork.NsgIn{"CLI-group", c.Name + "-nsg", "CentralIndia"}
