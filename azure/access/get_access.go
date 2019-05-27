@@ -61,5 +61,5 @@ func GetServicePrincipalToken() (adal.OAuthTokenProvider, string, error) {
 		log.Fatalf("%s: %v\n", "failed to initiate device auth", err)
 	}
 
-	return code, result.SubscriptionID, err)
+	return code, result.SubscriptionID, err
 }
